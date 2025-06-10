@@ -1,0 +1,136 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+/.idea/*
+!/.idea/runConfigurations
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env*.local
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+.env
+
+/media
+
+
+
+
+# =====================================================================
+# General
+# =====================================================================
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS-generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# =====================================================================
+# Node.js / npm / yarn / pnpm
+# =====================================================================
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Dependency directories
+# These are the most important lines!
+# They prevent the massive node_modules folder from being committed.
+node_modules/
+.pnp
+.pnp.js
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# =====================================================================
+# Payload CMS Specific
+# =====================================================================
+
+# Build directory
+# The compiled TypeScript code that Payload generates.
+build/
+dist/
+
+# Environment variables
+# CRITICAL: Never commit secrets!
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+
+# Uploaded media
+# Might choose to commit this to version-control a small
+# amount of seed media, but it's best practice to ignore it and use
+# a cloud storage adapter for production.
+uploads/
+
+# Payload generated types
+# These are auto-generated and should not be in version control.
+payload-types.ts
+
+# =====================================================================
+# Other
+# =====================================================================
+
+# Test reports
+coverage/
+.nyc_output/
