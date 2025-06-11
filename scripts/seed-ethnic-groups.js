@@ -1,22 +1,30 @@
-const fs = require('fs')
-const path = require('path')
-const csv = require('csv-parser')
-const fetch = 'node-fetch'
+import fs from 'fs'
+import path from 'path'
+import csv from 'csv-parser'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 const PAYLOAD_API_URL = 'http://localhost:3000/api'
-const GROUPS_CSV_PATH = path.join(__dirname, 'data', 'ethnic_groups.csv')
 
-// Re-using the same helper function
 async function findExisting(slug, name) {
-  // ... (copy the findExisting function from one of the scripts above) ...
+  if (!name || name.trim() === '') return null
+  const query = `${PAYLOAD_API_URL}/${slug}?where[name][equals]=${encodeURIComponent(name.trim())}`
+  const response = await fetch(query)
+  if (!response.ok) return null
+  const data = await response.json()
+  return data.docs && data.docs.length > 0 ? data.docs[0] : null
 }
 
 async function seedEthnicGroups() {
   console.log('--- Seeding Ethnic Groups ---')
   const rows = []
+  const csvPath = path.join(__dirname, '../data/ethnic-groups.csv')
 
   await new Promise((resolve, reject) => {
-    fs.createReadStream(GROUPS_CSV_PATH)
+    if (!fs.existsSync(csvPath)) return reject(new Error('CSV file not found.'))
+    fs.createReadStream(csvPath)
       .pipe(csv())
       .on('data', (row) => rows.push(row))
       .on('end', resolve)
@@ -29,7 +37,7 @@ async function seedEthnicGroups() {
 
   for (const row of rows) {
     if (!row.name || !row.description_short) {
-      console.error(`[SKIP] Row is missing required 'name' or 'description_short'. Data:`, row)
+      console.error(`[SKIP] Row is missing 'name' or 'description_short'. Data:`, row)
       skippedCount++
       continue
     }
@@ -59,14 +67,12 @@ async function seedEthnicGroups() {
         createdCount++
       } else {
         const errorData = await response.json()
-        console.error(
-          `[FAIL] Failed to create "${row.name}". Reason:`,
-          errorData.errors?.[0]?.message || 'Unknown error',
-        )
+        const errorMessage = errorData.errors?.[0]?.message || 'Unknown error'
+        console.error(`[FAIL] Failed to create "${row.name}". Reason: ${errorMessage}`)
         skippedCount++
       }
     } catch (e) {
-      console.error(`[FAIL] An unexpected network error occurred for "${row.name}":`, e)
+      console.error(`[FAIL] An unexpected network error for "${row.name}":`, e)
       skippedCount++
     }
   }

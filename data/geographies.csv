@@ -1,0 +1,67 @@
+name,type,parent_region_name
+North Africa,Continental Zone,
+West Africa,Continental Zone,
+Central Africa,Continental Zone,
+East Africa,Continental Zone,
+Southern Africa,Continental Zone,
+The Maghreb,Ecological Region,North Africa
+The Sahara,Ecological Region,
+Nile Valley,Ecological Region,
+The Sahel,Ecological Region,
+Horn of Africa,Ecological Region,East Africa
+Great Lakes Region,Ecological Region,East Africa
+Congo Basin,Ecological Region,Central Africa
+Algeria,Modern Nation,North Africa
+Angola,Modern Nation,Southern Africa
+Benin,Modern Nation,West Africa
+Botswana,Modern Nation,Southern Africa
+Burkina Faso,Modern Nation,West Africa
+Burundi,Modern Nation,East Africa
+Cape Verde,Modern Nation,West Africa
+Cameroon,Modern Nation,Central Africa
+Central African Republic,Modern Nation,Central Africa
+Chad,Modern Nation,Central Africa
+Comoros,Modern Nation,East Africa
+Congo (Congo-Brazzaville),Modern Nation,Central Africa
+Côte d'Ivoire,Modern Nation,West Africa
+Democratic Republic of the Congo,Modern Nation,Central Africa
+Djibouti,Modern Nation,East Africa
+Egypt,Modern Nation,North Africa
+Equatorial Guinea,Modern Nation,Central Africa
+Eritrea,Modern Nation,East Africa
+Eswatini (fmr. Swaziland),Modern Nation,Southern Africa
+Ethiopia,Modern Nation,East Africa
+Gabon,Modern Nation,Central Africa
+Gambia,Modern Nation,West Africa
+Ghana,Modern Nation,West Africa
+Guinea,Modern Nation,West Africa
+Guinea-Bissau,Modern Nation,West Africa
+Kenya,Modern Nation,East Africa
+Lesotho,Modern Nation,Southern Africa
+Liberia,Modern Nation,West Africa
+Libya,Modern Nation,North Africa
+Madagascar,Modern Nation,East Africa
+Malawi,Modern Nation,East Africa
+Mali,Modern Nation,West Africa
+Mauritania,Modern Nation,West Africa
+Mauritius,Modern Nation,East Africa
+Morocco,Modern Nation,North Africa
+Mozambique,Modern Nation,East Africa
+Namibia,Modern Nation,Southern Africa
+Niger,Modern Nation,West Africa
+Nigeria,Modern Nation,West Africa
+Rwanda,Modern Nation,East Africa
+Sao Tome and Principe,Modern Nation,Central Africa
+Senegal,Modern Nation,West Africa
+Seychelles,Modern Nation,East Africa
+Sierra Leone,Modern Nation,West Africa
+Somalia,Modern Nation,East Africa
+South Africa,Modern Nation,Southern Africa
+South Sudan,Modern Nation,East Africa
+Sudan,Modern Nation,North Africa
+Tanzania,Modern Nation,East Africa
+Togo,Modern Nation,West Africa
+Tunisia,Modern Nation,North Africa
+Uganda,Modern Nation,East Africa
+Zambia,Modern Nation,Southern Africa
+Zimbabwe,Modern Nation,Southern Africa

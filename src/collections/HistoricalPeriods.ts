@@ -6,6 +6,11 @@ const HistoricalPeriods: CollectionConfig = {
     useAsTitle: 'name',
     defaultColumns: ['name', 'period_date.year', 'updatedAt'],
   },
+  access: {
+    // Anyone can perform the 'read' operation
+    read: () => true,
+    create: () => true,
+  },
   fields: [
     {
       name: 'name',
@@ -65,6 +70,10 @@ const HistoricalPeriods: CollectionConfig = {
     {
       name: 'description',
       type: 'textarea',
+    },
+    {
+      name: 'sources',
+      type: 'richText', // Rich text allows for formatted links, lists, and notes
     },
   ],
 }

@@ -1,14 +1,19 @@
-const fs = require('fs')
-const path = require('path')
-const csv = require('csv-parser')
-const fetch = require('node-fetch')
+/* This script reads a CSV file containing data and seeds it into a Payload CMS Geographies collection.
+   It checks for existing entries to avoid duplicates and logs the results of each operation. */
+
+import fs from 'fs'
+import path from 'path'
+import csv from 'csv-parser'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 const PAYLOAD_API_URL = 'http://localhost:3000/api'
-const GEOGRAPHIES_CSV_PATH = path.join(__dirname, 'data', 'geographies.csv')
 
-// --- Helper function to find an existing entry by name ---
 async function findExisting(slug, name) {
-  const query = `${PAYLOAD_API_URL}/${slug}?where[name][equals]=${encodeURIComponent(name)}`
+  if (!name || name.trim() === '') return null
+  const query = `${PAYLOAD_API_URL}/${slug}?where[name][equals]=${encodeURIComponent(name.trim())}`
   try {
     const response = await fetch(query)
     if (!response.ok) return null
@@ -20,14 +25,16 @@ async function findExisting(slug, name) {
   }
 }
 
-// --- Main Seeding Function ---
 async function seedGeographies() {
   console.log('--- Seeding Geographies ---')
   const rows = []
+  const geographiesCsvPath = path.join(__dirname, '../data/geographies.csv')
 
-  // 1. Read all rows from CSV into memory first
   await new Promise((resolve, reject) => {
-    fs.createReadStream(GEOGRAPHIES_CSV_PATH)
+    if (!fs.existsSync(geographiesCsvPath)) {
+      return reject(new Error('CSV file not found.'))
+    }
+    fs.createReadStream(geographiesCsvPath)
       .pipe(csv())
       .on('data', (row) => rows.push(row))
       .on('end', resolve)
@@ -38,16 +45,13 @@ async function seedGeographies() {
   let createdCount = 0
   let skippedCount = 0
 
-  // 2. Process each row
   for (const row of rows) {
-    // A. Basic validation
     if (!row.name || !row.type) {
       console.error(`[SKIP] Row is missing required 'name' or 'type'. Data:`, row)
       skippedCount++
       continue
     }
 
-    // B. Check for duplicates to prevent errors
     const existing = await findExisting('geographies', row.name)
     if (existing) {
       console.log(`[SKIP] Geography "${row.name}" already exists.`)
@@ -55,9 +59,8 @@ async function seedGeographies() {
       continue
     }
 
-    // C. Find the parent region's ID
     let parentId = null
-    if (row.parent_region_name && row.parent_region_name.trim() !== '') {
+    if (row.parent_region_name) {
       const parent = await findExisting('geographies', row.parent_region_name)
       if (parent) {
         parentId = parent.id
@@ -68,14 +71,12 @@ async function seedGeographies() {
       }
     }
 
-    // D. Construct the payload
     const payload = {
       name: row.name.trim(),
       type: row.type.trim(),
       ...(parentId && { parent_region: parentId }),
     }
 
-    // E. Send to Payload API
     try {
       const response = await fetch(`${PAYLOAD_API_URL}/geographies`, {
         method: 'POST',
@@ -88,10 +89,8 @@ async function seedGeographies() {
         createdCount++
       } else {
         const errorData = await response.json()
-        console.error(
-          `[FAIL] Failed to create "${row.name}". Reason:`,
-          errorData.errors?.[0]?.message || 'Unknown error',
-        )
+        const errorMessage = errorData.errors?.[0]?.message || 'Unknown error'
+        console.error(`[FAIL] Failed to create "${row.name}". Reason: ${errorMessage}`)
         skippedCount++
       }
     } catch (e) {

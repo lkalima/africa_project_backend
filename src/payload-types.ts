@@ -166,6 +166,21 @@ export interface EthnicGroup {
   name: string;
   alternative_names?: string | null;
   description_short: string;
+  sources?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -185,6 +200,21 @@ export interface Geography {
     | 'Province / State'
     | 'City';
   parent_region?: (number | null) | Geography;
+  sources?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -202,6 +232,21 @@ export interface HistoricalPeriod {
     precision?: string | null;
   };
   description?: string | null;
+  sources?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -213,21 +258,38 @@ export interface MusicalInstrument {
   id: number;
   name: string;
   alternative_names?: string | null;
-  sound_source: 'String' | 'Membrane (Skin/Head)' | 'Body (Solid Object)' | 'Air Column' | 'Friction' | 'Other';
+  sound_source?:
+    | ('String' | 'Membrane (Skin/Head)' | 'Body (Solid Object)' | 'Air Column' | 'Friction' | 'Other')
+    | null;
   sound_source_other?: string | null;
-  playing_technique: 'Plucked' | 'Bowed' | 'Struck' | 'Blown' | 'Shaken' | 'Scraped' | 'Friction' | 'Other';
+  playing_technique?: ('Plucked' | 'Bowed' | 'Struck' | 'Blown' | 'Shaken' | 'Scraped' | 'Friction' | 'Other') | null;
   playing_technique_other?: string | null;
-  resonator_type?: ('Gourd' | 'Wooden Box' | 'Animal Horn' | 'Shell' | 'Clay Pot' | 'Mouth') | null;
-  primary_ethnic_group: number | EthnicGroup;
+  resonator_type?: string | null;
+  primary_ethnic_group?: (number | null) | EthnicGroup;
   associated_ethnic_groups?: (number | EthnicGroup)[] | null;
   geography_origin?: (number | Geography)[] | null;
   historical_context?: (number | HistoricalPeriod)[] | null;
   related_instruments_internal?: (number | MusicalInstrument)[] | null;
   related_instruments_external?: string | null;
-  primary_image: number | Media;
-  audio_sample: number | Media;
-  description_short: string;
+  primary_image?: (number | null) | Media;
+  audio_sample?: (number | null) | Media;
+  description_short?: string | null;
   description_long?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  sources?: {
     root: {
       type: string;
       children: {
@@ -359,6 +421,7 @@ export interface EthnicGroupsSelect<T extends boolean = true> {
   name?: T;
   alternative_names?: T;
   description_short?: T;
+  sources?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -370,6 +433,7 @@ export interface GeographiesSelect<T extends boolean = true> {
   name?: T;
   type?: T;
   parent_region?: T;
+  sources?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -388,6 +452,7 @@ export interface HistoricalPeriodsSelect<T extends boolean = true> {
         precision?: T;
       };
   description?: T;
+  sources?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -413,6 +478,7 @@ export interface MusicalInstrumentsSelect<T extends boolean = true> {
   audio_sample?: T;
   description_short?: T;
   description_long?: T;
+  sources?: T;
   updatedAt?: T;
   createdAt?: T;
 }

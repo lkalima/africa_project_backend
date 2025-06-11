@@ -6,6 +6,11 @@ const Geographies: CollectionConfig = {
     useAsTitle: 'name',
     defaultColumns: ['name', 'type', 'updatedAt'],
   },
+  access: {
+    // Anyone can perform the 'read' operation
+    read: () => true,
+    create: () => true,
+  },
   fields: [
     {
       name: 'name',
@@ -31,6 +36,10 @@ const Geographies: CollectionConfig = {
       type: 'relationship',
       relationTo: 'geographies',
       hasMany: false,
+    },
+    {
+      name: 'sources',
+      type: 'richText', // Rich text allows for formatted links, lists, and notes
     },
     // We can add a relationship to Historical Periods here later if needed
     // to link, for example, the "Kingdom of Benin" geography to the

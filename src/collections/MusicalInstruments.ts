@@ -6,6 +6,11 @@ const MusicalInstruments: CollectionConfig = {
     useAsTitle: 'name',
     defaultColumns: ['name', 'sound_source', 'playing_technique', 'updatedAt'],
   },
+  access: {
+    // Anyone can perform the 'read' operation
+    read: () => true,
+    create: () => true,
+  },
   fields: [
     // --- Basic Identification ---
     {
@@ -27,7 +32,7 @@ const MusicalInstruments: CollectionConfig = {
           name: 'sound_source',
           label: 'Primary Sound Source',
           type: 'select',
-          required: true,
+          // required: true,
           options: [
             'String',
             'Membrane (Skin/Head)',
@@ -59,7 +64,7 @@ const MusicalInstruments: CollectionConfig = {
           name: 'playing_technique',
           label: 'Primary Playing Technique',
           type: 'select',
-          required: true,
+          // required: true,
           options: [
             'Plucked',
             'Bowed',
@@ -88,8 +93,10 @@ const MusicalInstruments: CollectionConfig = {
     {
       name: 'resonator_type',
       label: 'Resonator Type (Optional)',
-      type: 'select',
-      options: ['Gourd', 'Wooden Box', 'Animal Horn', 'Shell', 'Clay Pot', 'Mouth'],
+      type: 'text', // <-- Change this from 'select' to 'text'
+      admin: {
+        placeholder: 'e.g., Gourd, Wooden Box, Skin',
+      },
     },
 
     // --- Relational Fields (The Knowledge Graph) ---
@@ -97,7 +104,7 @@ const MusicalInstruments: CollectionConfig = {
       name: 'primary_ethnic_group',
       type: 'relationship',
       relationTo: 'ethnic-groups',
-      required: true,
+      // required: true,
       hasMany: false,
     },
     {
@@ -139,22 +146,26 @@ const MusicalInstruments: CollectionConfig = {
       name: 'primary_image',
       type: 'upload',
       relationTo: 'media',
-      required: true,
+      // required: true,
     },
     {
       name: 'audio_sample',
       type: 'upload',
       relationTo: 'media',
-      required: true,
+      // required: true,
     },
     {
       name: 'description_short',
       type: 'textarea',
-      required: true,
+      // required: true,
     },
     {
       name: 'description_long',
       type: 'richText',
+    },
+    {
+      name: 'sources',
+      type: 'richText', // Rich text allows for formatted links, lists, and notes
     },
   ],
 }

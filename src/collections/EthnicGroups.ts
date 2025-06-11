@@ -12,6 +12,12 @@ const EthnicGroups: CollectionConfig = {
     defaultColumns: ['name', 'updatedAt'],
   },
 
+  access: {
+    // Anyone can perform the 'read' operation
+    read: () => true,
+    create: () => true,
+  },
+
   // The 'fields' array defines the data structure
   fields: [
     {
@@ -28,6 +34,10 @@ const EthnicGroups: CollectionConfig = {
       name: 'description_short',
       type: 'textarea',
       required: true,
+    },
+    {
+      name: 'sources',
+      type: 'richText', // Rich text allows for formatted links, lists, and notes
     },
   ],
 }
