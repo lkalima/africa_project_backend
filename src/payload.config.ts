@@ -9,6 +9,11 @@ import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+// Import collections here
+import EthnicGroups from './collections/EthnicGroups'
+import Geographies from './collections/Geographies'
+import HistoricalPeriods from './collections/HistoricalPeriods'
+import MusicalInstruments from './collections/MusicalInstruments'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -20,7 +25,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media],
+  collections: [Users, Media, EthnicGroups, Geographies, HistoricalPeriods, MusicalInstruments],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

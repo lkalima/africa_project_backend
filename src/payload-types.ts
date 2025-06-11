@@ -69,6 +69,10 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    'ethnic-groups': EthnicGroup;
+    geographies: Geography;
+    'historical-periods': HistoricalPeriod;
+    'musical-instruments': MusicalInstrument;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -77,6 +81,10 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    'ethnic-groups': EthnicGroupsSelect<false> | EthnicGroupsSelect<true>;
+    geographies: GeographiesSelect<false> | GeographiesSelect<true>;
+    'historical-periods': HistoricalPeriodsSelect<false> | HistoricalPeriodsSelect<true>;
+    'musical-instruments': MusicalInstrumentsSelect<false> | MusicalInstrumentsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -151,6 +159,94 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ethnic-groups".
+ */
+export interface EthnicGroup {
+  id: number;
+  name: string;
+  alternative_names?: string | null;
+  description_short: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "geographies".
+ */
+export interface Geography {
+  id: number;
+  name: string;
+  type:
+    | 'Continental Zone'
+    | 'Ecological Region'
+    | 'Physical Feature'
+    | 'Modern Nation'
+    | 'Historical State'
+    | 'Province / State'
+    | 'City';
+  parent_region?: (number | null) | Geography;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "historical-periods".
+ */
+export interface HistoricalPeriod {
+  id: number;
+  name: string;
+  conventional_name?: string | null;
+  period_date: {
+    year: number;
+    era: 'BCE/CE' | 'BC/AD' | 'BP';
+    precision?: string | null;
+  };
+  description?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "musical-instruments".
+ */
+export interface MusicalInstrument {
+  id: number;
+  name: string;
+  alternative_names?: string | null;
+  sound_source: 'String' | 'Membrane (Skin/Head)' | 'Body (Solid Object)' | 'Air Column' | 'Friction' | 'Other';
+  sound_source_other?: string | null;
+  playing_technique: 'Plucked' | 'Bowed' | 'Struck' | 'Blown' | 'Shaken' | 'Scraped' | 'Friction' | 'Other';
+  playing_technique_other?: string | null;
+  resonator_type?: ('Gourd' | 'Wooden Box' | 'Animal Horn' | 'Shell' | 'Clay Pot' | 'Mouth') | null;
+  primary_ethnic_group: number | EthnicGroup;
+  associated_ethnic_groups?: (number | EthnicGroup)[] | null;
+  geography_origin?: (number | Geography)[] | null;
+  historical_context?: (number | HistoricalPeriod)[] | null;
+  related_instruments_internal?: (number | MusicalInstrument)[] | null;
+  related_instruments_external?: string | null;
+  primary_image: number | Media;
+  audio_sample: number | Media;
+  description_short: string;
+  description_long?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -163,6 +259,22 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'ethnic-groups';
+        value: number | EthnicGroup;
+      } | null)
+    | ({
+        relationTo: 'geographies';
+        value: number | Geography;
+      } | null)
+    | ({
+        relationTo: 'historical-periods';
+        value: number | HistoricalPeriod;
+      } | null)
+    | ({
+        relationTo: 'musical-instruments';
+        value: number | MusicalInstrument;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -238,6 +350,71 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ethnic-groups_select".
+ */
+export interface EthnicGroupsSelect<T extends boolean = true> {
+  name?: T;
+  alternative_names?: T;
+  description_short?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "geographies_select".
+ */
+export interface GeographiesSelect<T extends boolean = true> {
+  name?: T;
+  type?: T;
+  parent_region?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "historical-periods_select".
+ */
+export interface HistoricalPeriodsSelect<T extends boolean = true> {
+  name?: T;
+  conventional_name?: T;
+  period_date?:
+    | T
+    | {
+        year?: T;
+        era?: T;
+        precision?: T;
+      };
+  description?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "musical-instruments_select".
+ */
+export interface MusicalInstrumentsSelect<T extends boolean = true> {
+  name?: T;
+  alternative_names?: T;
+  sound_source?: T;
+  sound_source_other?: T;
+  playing_technique?: T;
+  playing_technique_other?: T;
+  resonator_type?: T;
+  primary_ethnic_group?: T;
+  associated_ethnic_groups?: T;
+  geography_origin?: T;
+  historical_context?: T;
+  related_instruments_internal?: T;
+  related_instruments_external?: T;
+  primary_image?: T;
+  audio_sample?: T;
+  description_short?: T;
+  description_long?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

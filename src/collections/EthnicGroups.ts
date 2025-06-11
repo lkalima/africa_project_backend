@@ -1,17 +1,34 @@
 import { CollectionConfig } from 'payload/types'
 
 const EthnicGroups: CollectionConfig = {
+  // The 'slug' is the name of the collection in the API (e.g., /api/ethnic-groups)
   slug: 'ethnic-groups',
+
+  // The 'admin' object configures the admin panel experience
   admin: {
-    useAsTitle: 'name', // This is the fix for the display name issue!
+    // This tells Payload to use the 'name' field as the title in lists and relationships
+    useAsTitle: 'name',
+    // Sets the default sorting order in the admin list view
+    defaultColumns: ['name', 'updatedAt'],
   },
+
+  // The 'fields' array defines the data structure
   fields: [
     {
       name: 'name',
       type: 'text',
       required: true,
+      unique: true, // Ensures no two ethnic groups have the same name
     },
-    // We'll add more fields later
+    {
+      name: 'alternative_names',
+      type: 'text',
+    },
+    {
+      name: 'description_short',
+      type: 'textarea',
+      required: true,
+    },
   ],
 }
 
