@@ -13,6 +13,19 @@ The "Africa Project" aims to be a comprehensive, community-driven digital archiv
 *   **Language**: [TypeScript](https://www.typescriptlang.org/)
 *   **Database**: [PostgreSQL](https://www.postgresql.org/)
 
+## 📁 Project Structure
+
+This Payload CMS project follows a structured layout. Here is an overview of the key files and directories:
+
+*   **/src/**: The primary source code directory for the application.
+    *   **/src/collections/**: This is the heart of the CMS. Each `.ts` file defines a data model (e.g., `MusicalInstruments.ts`, `EthnicGroups.ts`). These files control the admin UI and API structure.
+    *   **/src/payload.config.ts**: The main configuration file for Payload. This is where collections are registered, plugins are added, and core settings are defined.
+*   **/data/**: Contains the `.csv` source files used for populating the database. This directory is tracked by Git to maintain a record of the raw seed data.
+*   **/scripts/**: Holds the Node.js scripts used to seed the database. These scripts read from the `/data` directory and write to the API.
+*   **/uploads/**: (Ignored by Git) When you upload media through the admin panel in your local environment, the files are stored here.
+*   **.env**: (Ignored by Git) **CRITICAL:** This file holds all secret keys and environment variables, such as your database connection string and Payload secret. It should never be committed to Git.
+*   **payload-types.ts**: (Ignored by Git) An auto-generated TypeScript file that contains all the types for your collections. This provides type safety across the project.
+
 ## Local Development Setup
 
 Follow these steps to get the backend running on your local machine.
