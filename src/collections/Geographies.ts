@@ -1,5 +1,11 @@
 import { CollectionConfig } from 'payload/types'
 
+const formatSlug = (val: string): string =>
+  val
+    .toLowerCase()
+    .replace(/ /g, '-')
+    .replace(/[^\w-]+/g, '')
+
 const Geographies: CollectionConfig = {
   slug: 'geographies',
   admin: {
@@ -16,6 +22,23 @@ const Geographies: CollectionConfig = {
       name: 'name',
       type: 'text',
       required: true,
+    },
+    {
+      name: 'slug',
+      type: 'text',
+      unique: true,
+      admin: {
+        position: 'sidebar',
+      },
+      hooks: {
+        beforeValidate: [
+          ({ value, data }) => {
+            if (value) return formatSlug(value)
+            if (data.name) return formatSlug(data.name)
+            return value
+          },
+        ],
+      },
     },
     {
       name: 'type',

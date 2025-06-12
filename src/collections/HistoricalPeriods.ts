@@ -1,5 +1,11 @@
 import { CollectionConfig } from 'payload/types'
 
+const formatSlug = (val: string): string =>
+  val
+    .toLowerCase()
+    .replace(/ /g, '-')
+    .replace(/[^\w-]+/g, '')
+
 const HistoricalPeriods: CollectionConfig = {
   slug: 'historical-periods',
   admin: {
@@ -17,6 +23,23 @@ const HistoricalPeriods: CollectionConfig = {
       type: 'text',
       required: true,
       unique: true,
+    },
+    {
+      name: 'slug',
+      type: 'text',
+      unique: true,
+      admin: {
+        position: 'sidebar',
+      },
+      hooks: {
+        beforeValidate: [
+          ({ value, data }) => {
+            if (value) return formatSlug(value)
+            if (data.name) return formatSlug(data.name)
+            return value
+          },
+        ],
+      },
     },
     {
       name: 'conventional_name',

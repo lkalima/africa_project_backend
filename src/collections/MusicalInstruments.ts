@@ -19,6 +19,35 @@ const MusicalInstruments: CollectionConfig = {
       required: true,
     },
     {
+      name: 'slug',
+      type: 'text',
+      unique: true, // Slugs must be unique
+      admin: {
+        position: 'sidebar', // Puts it in the sidebar for a cleaner layout
+      },
+      hooks: {
+        // This hook runs before a document is created or updated
+        beforeValidate: [
+          ({ value, data }) => {
+            // If a slug is provided, use it. If not, generate one from the 'name' field.
+            if (value) {
+              return value
+                .toLowerCase()
+                .replace(/ /g, '-')
+                .replace(/[^\w-]+/g, '')
+            }
+            if (data.name) {
+              return data.name
+                .toLowerCase()
+                .replace(/ /g, '-')
+                .replace(/[^\w-]+/g, '')
+            }
+            return value
+          },
+        ],
+      },
+    },
+    {
       name: 'alternative_names',
       type: 'text',
     },

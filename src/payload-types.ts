@@ -164,6 +164,7 @@ export interface Media {
 export interface EthnicGroup {
   id: number;
   name: string;
+  slug?: string | null;
   alternative_names?: string | null;
   description_short: string;
   sources?: {
@@ -191,6 +192,7 @@ export interface EthnicGroup {
 export interface Geography {
   id: number;
   name: string;
+  slug?: string | null;
   type:
     | 'Continental Zone'
     | 'Ecological Region'
@@ -225,6 +227,7 @@ export interface Geography {
 export interface HistoricalPeriod {
   id: number;
   name: string;
+  slug?: string | null;
   conventional_name?: string | null;
   period_date: {
     year: number;
@@ -257,6 +260,7 @@ export interface HistoricalPeriod {
 export interface MusicalInstrument {
   id: number;
   name: string;
+  slug?: string | null;
   alternative_names?: string | null;
   sound_source?:
     | ('String' | 'Membrane (Skin/Head)' | 'Body (Solid Object)' | 'Air Column' | 'Friction' | 'Other')
@@ -419,6 +423,7 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface EthnicGroupsSelect<T extends boolean = true> {
   name?: T;
+  slug?: T;
   alternative_names?: T;
   description_short?: T;
   sources?: T;
@@ -431,6 +436,7 @@ export interface EthnicGroupsSelect<T extends boolean = true> {
  */
 export interface GeographiesSelect<T extends boolean = true> {
   name?: T;
+  slug?: T;
   type?: T;
   parent_region?: T;
   sources?: T;
@@ -443,6 +449,7 @@ export interface GeographiesSelect<T extends boolean = true> {
  */
 export interface HistoricalPeriodsSelect<T extends boolean = true> {
   name?: T;
+  slug?: T;
   conventional_name?: T;
   period_date?:
     | T
@@ -462,6 +469,7 @@ export interface HistoricalPeriodsSelect<T extends boolean = true> {
  */
 export interface MusicalInstrumentsSelect<T extends boolean = true> {
   name?: T;
+  slug?: T;
   alternative_names?: T;
   sound_source?: T;
   sound_source_other?: T;
