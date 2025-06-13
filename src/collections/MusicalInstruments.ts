@@ -174,14 +174,34 @@ const MusicalInstruments: CollectionConfig = {
     {
       name: 'primary_image',
       type: 'upload',
-      relationTo: 'media',
+      relationTo: 'media', // This links to the Media collection
       // required: true,
     },
     {
       name: 'audio_sample',
       type: 'upload',
-      relationTo: 'media',
+      relationTo: 'media', // This also links to the Media collection
       // required: true,
+    },
+    // This is the component for video links we discussed earlier
+    // Let's add it now.
+    {
+      name: 'video_links',
+      type: 'array', // Use an 'array' field for a repeatable list of fields
+      label: 'Performance/Video Links',
+      fields: [
+        {
+          name: 'url',
+          type: 'text',
+          label: 'Video URL (e.g., YouTube)',
+          // required: true,
+        },
+        {
+          name: 'description',
+          type: 'text',
+          label: 'Brief Description',
+        },
+      ],
     },
     {
       name: 'description_short',

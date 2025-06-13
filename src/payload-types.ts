@@ -277,6 +277,13 @@ export interface MusicalInstrument {
   related_instruments_external?: string | null;
   primary_image?: (number | null) | Media;
   audio_sample?: (number | null) | Media;
+  video_links?:
+    | {
+        url?: string | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   description_short?: string | null;
   description_long?: {
     root: {
@@ -484,6 +491,13 @@ export interface MusicalInstrumentsSelect<T extends boolean = true> {
   related_instruments_external?: T;
   primary_image?: T;
   audio_sample?: T;
+  video_links?:
+    | T
+    | {
+        url?: T;
+        description?: T;
+        id?: T;
+      };
   description_short?: T;
   description_long?: T;
   sources?: T;
