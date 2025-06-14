@@ -4,7 +4,7 @@ This repository contains the source code for the backend of the "Africa Project"
 
 ## Project Vision
 
-The "Africa Project" aims to be a comprehensive, community-driven digital archive and encyclopedia dedicated to the preservation, celebration, and exploration of the cultures, histories, and peoples of the African continent. This backend is the foundational content hub for that vision. For more details, see the full [Project Blueprint](./DOCUMENTATION.md).
+The "Africa Project" aims to be a comprehensive, community-driven digital archive and encyclopedia dedicated to the preservation, celebration, and exploration of the cultures, histories, and peoples of the African continent. This backend is the foundational content hub for that vision. For more details, see the full [Project Blueprint](https://imiak1910.onlyoffice.com/s/jnJbN52qTTc_P5r).
 
 ## Core Technologies
 
