@@ -15,6 +15,10 @@ import Geographies from './collections/Geographies'
 import HistoricalPeriods from './collections/HistoricalPeriods'
 import MusicalInstruments from './collections/MusicalInstruments'
 
+// --- 1. IMPORT THE NEW PLUGINS ---
+import { openapi } from 'payload-oapi'
+import { swaggerUI } from 'payload-oapi'
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -36,9 +40,16 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI || '',
     },
   }),
-  sharp,
+
   plugins: [
     payloadCloudPlugin(),
     // storage-adapter-placeholder
+    openapi({
+      openapiVersion: '3.0',
+      metadata: { title: 'Africa Project API', version: '0.0.1' },
+    }),
+    swaggerUI({}),
   ],
+
+  sharp,
 })

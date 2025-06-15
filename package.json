@@ -25,6 +25,7 @@
     "graphql": "^16.8.1",
     "next": "15.3.0",
     "payload": "3.42.0",
+    "payload-oapi": "^0.2.3",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "sharp": "0.32.6"
