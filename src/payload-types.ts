@@ -230,7 +230,10 @@ export interface Geography {
     | 'Historical State'
     | 'Province / State'
     | 'City';
-  parent_region?: (number | null) | Geography;
+  /**
+   * Link this geography to the larger regions it belongs to (e.g., link a country to its continental and ecological zones).
+   */
+  containing_regions?: (number | Geography)[] | null;
   instruments?: {
     docs?: (number | MusicalInstrument)[];
     hasNextPage?: boolean;
@@ -499,7 +502,7 @@ export interface GeographiesSelect<T extends boolean = true> {
   name?: T;
   slug?: T;
   type?: T;
-  parent_region?: T;
+  containing_regions?: T;
   instruments?: T;
   child_regions?: T;
   ethnic_groups?: T;

@@ -55,12 +55,27 @@ const Geographies: CollectionConfig = {
         'City', // i.e., Lagos
       ],
     },
+    // --- NEW, FLEXIBLE RELATIONSHIP ---
+    // This replaces parent_region
     {
-      name: 'parent_region',
+      name: 'containing_regions',
+      label: 'Part Of (Broader Regions)',
       type: 'relationship',
       relationTo: 'geographies',
-      hasMany: false,
+      hasMany: true, // <-- The key change: allows multiple parents
+      admin: {
+        description:
+          'Link this geography to the larger regions it belongs to (e.g., link a country to its continental and ecological zones).',
+        // Optional: Filter so you can only select larger region types
+        filterOptions: {
+          type: {
+            in: ['Continental Zone', 'Ecological Region'],
+          },
+        },
+      },
     },
+    // --------------------------------
+
     {
       name: 'instruments',
       type: 'join',
@@ -74,12 +89,10 @@ const Geographies: CollectionConfig = {
     {
       name: 'child_regions',
       type: 'join',
-      collection: 'geographies', // Joining to itself
-      on: 'parent_region', // On the field that points to this collection
-      label: 'Child Regions',
-      admin: {
-        readOnly: true,
-      },
+      collection: 'geographies',
+      on: 'containing_regions', // <-- UPDATE THIS TO POINT TO THE NEW FIELD.
+      label: 'Sub-Regions / Nations',
+      admin: { readOnly: true },
     },
     // --- STABLE JOIN FIELD ---
     {
