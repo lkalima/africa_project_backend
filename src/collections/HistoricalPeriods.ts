@@ -16,6 +16,7 @@ const HistoricalPeriods: CollectionConfig = {
     // Anyone can perform the 'read' operation
     read: () => true,
     create: () => true,
+    update: () => true, // <-- ADD THIS LINE
   },
   fields: [
     {
@@ -89,6 +90,16 @@ const HistoricalPeriods: CollectionConfig = {
           },
         },
       ],
+    },
+    {
+      name: 'instruments',
+      type: 'join',
+      collection: 'musical-instruments',
+      on: 'historical_context',
+      label: 'Instruments from this Period',
+      admin: {
+        readOnly: true,
+      },
     },
     {
       name: 'description',

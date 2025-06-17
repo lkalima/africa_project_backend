@@ -10,6 +10,7 @@ const MusicalInstruments: CollectionConfig = {
     // Anyone can perform the 'read' operation
     read: () => true,
     create: () => true,
+    update: () => true, // <-- ADD THIS LINE
   },
   fields: [
     // --- Basic Identification ---

@@ -77,7 +77,20 @@ export interface Config {
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {};
+  collectionsJoins: {
+    'ethnic-groups': {
+      primary_instruments: 'musical-instruments';
+      associated_instruments: 'musical-instruments';
+    };
+    geographies: {
+      instruments: 'musical-instruments';
+      child_regions: 'geographies';
+      ethnic_groups: 'ethnic-groups';
+    };
+    'historical-periods': {
+      instruments: 'musical-instruments';
+    };
+  };
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
@@ -167,6 +180,22 @@ export interface EthnicGroup {
   slug?: string | null;
   alternative_names?: string | null;
   description_short: string;
+  /**
+   * List the primary regions and nations where this ethnic group is found.
+   */
+  geographies?: (number | Geography)[] | null;
+  primary_nations?: (number | Geography)[] | null;
+  broader_regions?: (number | Geography)[] | null;
+  primary_instruments?: {
+    docs?: (number | MusicalInstrument)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  associated_instruments?: {
+    docs?: (number | MusicalInstrument)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
   sources?: {
     root: {
       type: string;
@@ -202,39 +231,21 @@ export interface Geography {
     | 'Province / State'
     | 'City';
   parent_region?: (number | null) | Geography;
-  sources?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "historical-periods".
- */
-export interface HistoricalPeriod {
-  id: number;
-  name: string;
-  slug?: string | null;
-  conventional_name?: string | null;
-  period_date: {
-    year: number;
-    era: 'BCE/CE' | 'BC/AD' | 'BP';
-    precision?: string | null;
+  instruments?: {
+    docs?: (number | MusicalInstrument)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
   };
-  description?: string | null;
+  child_regions?: {
+    docs?: (number | Geography)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  ethnic_groups?: {
+    docs?: (number | EthnicGroup)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
   sources?: {
     root: {
       type: string;
@@ -300,6 +311,44 @@ export interface MusicalInstrument {
     };
     [k: string]: unknown;
   } | null;
+  sources?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "historical-periods".
+ */
+export interface HistoricalPeriod {
+  id: number;
+  name: string;
+  slug?: string | null;
+  conventional_name?: string | null;
+  period_date: {
+    year: number;
+    era: 'BCE/CE' | 'BC/AD' | 'BP';
+    precision?: string | null;
+  };
+  instruments?: {
+    docs?: (number | MusicalInstrument)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  description?: string | null;
   sources?: {
     root: {
       type: string;
@@ -433,6 +482,11 @@ export interface EthnicGroupsSelect<T extends boolean = true> {
   slug?: T;
   alternative_names?: T;
   description_short?: T;
+  geographies?: T;
+  primary_nations?: T;
+  broader_regions?: T;
+  primary_instruments?: T;
+  associated_instruments?: T;
   sources?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -446,6 +500,9 @@ export interface GeographiesSelect<T extends boolean = true> {
   slug?: T;
   type?: T;
   parent_region?: T;
+  instruments?: T;
+  child_regions?: T;
+  ethnic_groups?: T;
   sources?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -465,6 +522,7 @@ export interface HistoricalPeriodsSelect<T extends boolean = true> {
         era?: T;
         precision?: T;
       };
+  instruments?: T;
   description?: T;
   sources?: T;
   updatedAt?: T;

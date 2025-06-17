@@ -23,6 +23,7 @@ const EthnicGroups: CollectionConfig = {
     // Anyone can perform the 'read' operation
     read: () => true,
     create: () => true,
+    update: () => true, // <-- ADD THIS LINE
   },
 
   // The 'fields' array defines the data structure
@@ -63,6 +64,52 @@ const EthnicGroups: CollectionConfig = {
       type: 'textarea',
       required: true,
     },
+    {
+      name: 'geographies',
+      type: 'relationship',
+      relationTo: 'geographies',
+      hasMany: true,
+      label: 'Geographic Distribution',
+      admin: {
+        description: 'List the primary regions and nations where this ethnic group is found.',
+      },
+    },
+    // --- REVISED GEOGRAPHY RELATIONSHIPS ---
+    {
+      name: 'primary_nations',
+      type: 'relationship',
+      relationTo: 'geographies',
+      hasMany: true,
+      label: 'Primary Modern Nations',
+      admin: { filterOptions: { type: { equals: 'Modern Nation' } } },
+    },
+    {
+      name: 'broader_regions',
+      type: 'relationship',
+      relationTo: 'geographies',
+      hasMany: true,
+      label: 'Broader Ethno-Geographic / Continental Regions',
+      admin: { filterOptions: { type: { in: ['Ethno-Geographic Region', 'Continental Zone'] } } },
+    },
+    // ------------------------------------
+    // --- JOIN FIELDS to show related instruments ---
+    {
+      name: 'primary_instruments',
+      type: 'join',
+      collection: 'musical-instruments',
+      on: 'primary_ethnic_group',
+      label: 'Primary Instruments',
+      admin: { readOnly: true },
+    },
+    {
+      name: 'associated_instruments',
+      type: 'join',
+      collection: 'musical-instruments',
+      on: 'associated_ethnic_groups',
+      label: 'Associated Instruments',
+      admin: { readOnly: true },
+    },
+
     {
       name: 'sources',
       type: 'richText', // Rich text allows for formatted links, lists, and notes

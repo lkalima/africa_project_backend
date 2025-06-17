@@ -16,6 +16,7 @@ const Geographies: CollectionConfig = {
     // Anyone can perform the 'read' operation
     read: () => true,
     create: () => true,
+    update: () => true, // <-- ADD THIS LINE
   },
   fields: [
     {
@@ -60,6 +61,38 @@ const Geographies: CollectionConfig = {
       relationTo: 'geographies',
       hasMany: false,
     },
+    {
+      name: 'instruments',
+      type: 'join',
+      collection: 'musical-instruments',
+      on: 'geography_origin',
+      label: 'Instruments from this Region',
+      admin: {
+        readOnly: true,
+      },
+    },
+    {
+      name: 'child_regions',
+      type: 'join',
+      collection: 'geographies', // Joining to itself
+      on: 'parent_region', // On the field that points to this collection
+      label: 'Child Regions',
+      admin: {
+        readOnly: true,
+      },
+    },
+    // --- STABLE JOIN FIELD ---
+    {
+      name: 'ethnic_groups',
+      type: 'join',
+      collection: 'ethnic-groups',
+      // Join ONLY on the direct primary nation link.
+      // We will handle the broader region logic on the frontend.
+      on: 'primary_nations',
+      label: 'Ethnic Groups Primarily Found Here',
+      admin: { readOnly: true },
+    },
+    // -----------------------
     {
       name: 'sources',
       type: 'richText', // Rich text allows for formatted links, lists, and notes
