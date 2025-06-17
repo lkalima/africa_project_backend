@@ -1,4 +1,4 @@
-name,type,parent_region_name
+name,type,containing_regions_names
 North Africa,Continental Zone,
 West Africa,Continental Zone,
 Central Africa,Continental Zone,
@@ -6,62 +6,62 @@ East Africa,Continental Zone,
 Southern Africa,Continental Zone,
 The Maghreb,Ecological Region,North Africa
 The Sahara,Ecological Region,
-Nile Valley,Ecological Region,
-The Sahel,Ecological Region,
-Horn of Africa,Ecological Region,East Africa
-Great Lakes Region,Ecological Region,East Africa
+Nile Valley,Ecological Region,"North Africa|East Africa"
+The Sahel,Ecological Region,"North Africa|West Africa|East Africa"
+Horn of Africa,Ecological Region,"East Africa|The Sahel"
+Great Lakes Region,Ecological Region,"East Africa|Central Africa"
 Congo Basin,Ecological Region,Central Africa
-Algeria,Modern Nation,North Africa
-Angola,Modern Nation,Southern Africa
+Algeria,Modern Nation,"North Africa|The Maghreb|The Sahara"
+Angola,Modern Nation,"Central Africa|Southern Africa"
 Benin,Modern Nation,West Africa
 Botswana,Modern Nation,Southern Africa
-Burkina Faso,Modern Nation,West Africa
-Burundi,Modern Nation,East Africa
+Burundi,Modern Nation,"East Africa|Great Lakes Region"
+Burkina Faso,Modern Nation,"West Africa|The Sahel"
+Cameroon,Modern Nation,"Central Africa|West Africa"
 Cape Verde,Modern Nation,West Africa
-Cameroon,Modern Nation,Central Africa
 Central African Republic,Modern Nation,Central Africa
-Chad,Modern Nation,Central Africa
+Chad,Modern Nation,"Central Africa|The Sahel"
 Comoros,Modern Nation,East Africa
 Congo (Congo-Brazzaville),Modern Nation,Central Africa
 Côte d'Ivoire,Modern Nation,West Africa
-Democratic Republic of the Congo,Modern Nation,Central Africa
-Djibouti,Modern Nation,East Africa
-Egypt,Modern Nation,North Africa
+Democratic Republic of the Congo,Modern Nation,"Central Africa|Great Lakes Region"
+Djibouti,Modern Nation,"East Africa|Horn of Africa"
+Egypt,Modern Nation,"North Africa|Nile Valley"
 Equatorial Guinea,Modern Nation,Central Africa
-Eritrea,Modern Nation,East Africa
+Eritrea,Modern Nation,"East Africa|Horn of Africa"
 Eswatini (fmr. Swaziland),Modern Nation,Southern Africa
-Ethiopia,Modern Nation,East Africa
+Ethiopia,Modern Nation,"East Africa|Horn of Africa"
 Gabon,Modern Nation,Central Africa
 Gambia,Modern Nation,West Africa
 Ghana,Modern Nation,West Africa
 Guinea,Modern Nation,West Africa
 Guinea-Bissau,Modern Nation,West Africa
-Kenya,Modern Nation,East Africa
+Kenya,Modern Nation,"East Africa|Great Lakes Region"
 Lesotho,Modern Nation,Southern Africa
 Liberia,Modern Nation,West Africa
-Libya,Modern Nation,North Africa
+Libya,Modern Nation,"North Africa|The Maghreb|The Sahara"
 Madagascar,Modern Nation,East Africa
-Malawi,Modern Nation,East Africa
-Mali,Modern Nation,West Africa
-Mauritania,Modern Nation,West Africa
+Malawi,Modern Nation,"East Africa|Southern Africa"
+Mali,Modern Nation,"West Africa|The Sahel|The Sahara"
+Mauritania,Modern Nation,"West Africa|The Maghreb|The Sahara"
 Mauritius,Modern Nation,East Africa
-Morocco,Modern Nation,North Africa
-Mozambique,Modern Nation,East Africa
+Morocco,Modern Nation,"North Africa|The Maghreb"
+Mozambique,Modern Nation,"East Africa|Southern Africa"
 Namibia,Modern Nation,Southern Africa
-Niger,Modern Nation,West Africa
+Niger,Modern Nation,"West Africa|The Sahel|The Sahara"
 Nigeria,Modern Nation,West Africa
-Rwanda,Modern Nation,East Africa
+Rwanda,Modern Nation,"East Africa|Great Lakes Region"
 Sao Tome and Principe,Modern Nation,Central Africa
 Senegal,Modern Nation,West Africa
 Seychelles,Modern Nation,East Africa
 Sierra Leone,Modern Nation,West Africa
-Somalia,Modern Nation,East Africa
+Somalia,Modern Nation,"East Africa|Horn of Africa"
 South Africa,Modern Nation,Southern Africa
 South Sudan,Modern Nation,East Africa
-Sudan,Modern Nation,North Africa
-Tanzania,Modern Nation,East Africa
+Sudan,Modern Nation,"North Africa|The Sahel|Nile Valley"
+Tanzania,Modern Nation,"East Africa|Great Lakes Region"
 Togo,Modern Nation,West Africa
-Tunisia,Modern Nation,North Africa
-Uganda,Modern Nation,East Africa
-Zambia,Modern Nation,Southern Africa
+Tunisia,Modern Nation,"North Africa|The Maghreb"
+Uganda,Modern Nation,"East Africa|Great Lakes Region"
+Zambia,Modern Nation,"Southern Africa|Central Africa"
 Zimbabwe,Modern Nation,Southern Africa
