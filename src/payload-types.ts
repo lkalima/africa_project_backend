@@ -73,6 +73,7 @@ export interface Config {
     geographies: Geography;
     'historical-periods': HistoricalPeriod;
     'musical-instruments': MusicalInstrument;
+    search: Search;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -98,6 +99,7 @@ export interface Config {
     geographies: GeographiesSelect<false> | GeographiesSelect<true>;
     'historical-periods': HistoricalPeriodsSelect<false> | HistoricalPeriodsSelect<true>;
     'musical-instruments': MusicalInstrumentsSelect<false> | MusicalInstrumentsSelect<true>;
+    search: SearchSelect<false> | SearchSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -371,6 +373,37 @@ export interface HistoricalPeriod {
   createdAt: string;
 }
 /**
+ * This is a collection of automatically created search results. These results are used by the global site search and will be updated automatically as documents in the CMS are created or updated.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "search".
+ */
+export interface Search {
+  id: number;
+  title?: string | null;
+  priority?: number | null;
+  doc:
+    | {
+        relationTo: 'musical-instruments';
+        value: number | MusicalInstrument;
+      }
+    | {
+        relationTo: 'ethnic-groups';
+        value: number | EthnicGroup;
+      }
+    | {
+        relationTo: 'geographies';
+        value: number | Geography;
+      }
+    | {
+        relationTo: 'historical-periods';
+        value: number | HistoricalPeriod;
+      };
+  description?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
@@ -400,6 +433,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'musical-instruments';
         value: number | MusicalInstrument;
+      } | null)
+    | ({
+        relationTo: 'search';
+        value: number | Search;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -562,6 +599,18 @@ export interface MusicalInstrumentsSelect<T extends boolean = true> {
   description_short?: T;
   description_long?: T;
   sources?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "search_select".
+ */
+export interface SearchSelect<T extends boolean = true> {
+  title?: T;
+  priority?: T;
+  doc?: T;
+  description?: T;
   updatedAt?: T;
   createdAt?: T;
 }
