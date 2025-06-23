@@ -60,15 +60,17 @@ export default buildConfig({
       collections: ['musical-instruments', 'ethnic-groups', 'geographies', 'historical-periods'],
       // --- ADD THIS BLOCK BACK ---
       defaultPriorities: {
-        'musical-instruments': 10,
-        'ethnic-groups': 9,
-        geographies: 8,
+        'musical-instruments': 9,
+        'ethnic-groups': 8,
+        geographies: 10,
         'historical-periods': 7,
       },
       // -------------------------
       // --- 2. ADD THE SEARCH PLUGIN ---
       searchOverrides: {
+        slug: 'search',
         access: { read: () => true },
+
         fields: ({ defaultFields }) => [
           ...defaultFields,
           { name: 'description', type: 'textarea', admin: { readOnly: true } },
