@@ -2,6 +2,7 @@
 
 This repository contains the source code for the backend of the "Africa Project" (working title). It is a [Payload CMS](https://payloadcms.com/) application that serves as a Headless CMS, providing a powerful admin panel for content management and a robust REST/GraphQL API for the frontend.
 
+
 ## Project Vision
 
 The "Africa Project" aims to be a comprehensive, community-driven digital archive and encyclopedia dedicated to the preservation, celebration, and exploration of the cultures, histories, and peoples of the African continent. This backend is the foundational content hub for that vision. For more details, see the full [Project Blueprint](https://imiak1910.onlyoffice.com/s/jnJbN52qTTc_P5r).
@@ -40,8 +41,8 @@ Follow these steps to get the backend running on your local machine.
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/YourUsername/african-voices-backend.git
-    cd african-voices-backend
+    git clone https://github.com/YourUsername/african_project_backend.git
+    cd africa_project_backend
     ```
 
 2.  **Install dependencies:**
@@ -79,3 +80,24 @@ The `/scripts` directory contains Node.js scripts for seeding the database from 
 # Example for seeding geographies
 node scripts/seed-geographies.js
 ```
+
+## UI Screenshots
+
+Landing page (admin):
+
+![Screenshot 2025-06-29 234846](https://github.com/user-attachments/assets/7354140f-9f45-4fed-942d-2d0a3c9b98cb)
+
+
+Collections (i.e. musical-instruments):
+
+![Screenshot 2025-06-29 234944](https://github.com/user-attachments/assets/0d10bfa1-50de-4a91-abf0-7732882c4425)
+
+
+Editing entries (i.e. within musical-instruments):
+
+![Screenshot 2025-06-29 234932](https://github.com/user-attachments/assets/5ae03cb3-739f-46a2-bf58-6543e72229e4)
+
+Documentation (openAPI/Swagger-UI):
+
+![Screenshot 2025-06-29 234828](https://github.com/user-attachments/assets/49481338-5830-4400-85a2-8abf7c1306de)
+
