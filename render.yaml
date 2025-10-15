@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: africa-project-backend
+    env: node
+    plan: free
+    region: frankfurt # Important: Deploy the service in the same region as the DB
+    buildCommand: "npm install"
+    startCommand: "npm start"
+    envVars:
+      # We are providing the database URL directly now
+      - key: DATABASE_URI
+        value: postgresql://africa_project_db_user:rlDT2cyVoCYLw56XWw0uhRxbX0E163QU@dpg-d3nplhbe5dus73eh4r50-a.frankfurt-postgres.render.com/africa_project_db
+      - key: PAYLOAD_SECRET
+        generateValue: true
+      - key: NODE_ENV
+        value: production
