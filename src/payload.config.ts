@@ -42,7 +42,7 @@ export default buildConfig({
   }),
 
   graphQL: {
-    schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
+    schemaOutputFile: path.resolve(dirname, 'generated-schema.graphql'),
   },
   sharp,
   // ------------------------------------------
