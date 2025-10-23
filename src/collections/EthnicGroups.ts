@@ -1,4 +1,4 @@
-import { CollectionConfig } from 'payload'
+import { CollectionConfig } from 'payload/types'
 
 // The hook function to generate a slug
 const formatSlug = (val: string): string =>
