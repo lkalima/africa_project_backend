@@ -1,4 +1,4 @@
-import { CollectionConfig } from 'payload'
+import { CollectionConfig } from 'payload/types'
 
 import { json2csv } from 'json-2-csv'
 import { PayloadRequest } from 'payload'
